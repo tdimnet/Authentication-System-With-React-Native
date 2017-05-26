@@ -4,6 +4,8 @@ import {
   View,
 } from 'react-native';
 
+import firebase from 'firebase';
+
 import {
   Header,
   Button,
@@ -15,7 +17,26 @@ import LoginForm from './components/LoginForm';
 
 class App extends Component {
 
-  state = { loggedIn: false };
+  state = { loggedIn: null };
+
+  componentWillMount() {
+    firebase.initializeApp({
+      apiKey: "AIzaSyAbOOmYJW3Slf9vJqC2b6hwRwLU9NqHdRo",
+      authDomain: "authenticationapp-597f6.firebaseapp.com",
+      databaseURL: "https://authenticationapp-597f6.firebaseio.com",
+      projectId: "authenticationapp-597f6",
+      storageBucket: "authenticationapp-597f6.appspot.com",
+      messagingSenderId: "880542263898"
+    });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true })
+      } else {
+        this.setState({ loggedIn: false })
+      }
+    });
+  }
 
 
   renderContent() {
