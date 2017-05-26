@@ -5,8 +5,11 @@ import {
 } from 'react-native';
 
 import {
-  Header
+  Header,
+  Card,
+  CardSection,
 } from './components/common';
+
 
 class App extends Component {
   render() {
